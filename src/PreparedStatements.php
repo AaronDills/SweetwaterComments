@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of PreparedStatements
+ * Statements used to query the database table
  *
  * @author aaronsdills
  */
