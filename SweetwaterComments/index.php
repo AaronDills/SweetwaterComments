@@ -1,4 +1,5 @@
 <?php include 'db_connection.php';?>
+<?php include 'CommentTable.php';?>
 <?php include 'prepared_queries.php';?>
 <html>
     <head>
@@ -8,71 +9,30 @@
     <body>
         <?php
            $mysqli=openConn();
-           $candy_results=$mysqli->query("SELECT * FROM sweetwater_test WHERE comments like '%candy%'");
-           $call_results=$mysqli->query($CALL_QUERY);
-           $referred_results=$mysqli->query($REFFERED_QUERY);
-           $signature_results=$mysqli->query($SIGNATURE_QUERY);
-           $misc_results=$mysqli->query($MISC_QUERY);
            
-           $important = $arr[1];
-           
-           echo "<table border='1'>";
-           echo "<caption>Candy Comments</caption>";
-           while ($row = $row = $candy_results->fetch_assoc()) {
-                $date = strtotime(explode('Expected Ship Date: ', $row['comments'])[1]); 
-                if(!empty($date) && $row['shipdate_expected'] == '0000-00-00 00:00:00'){
-                }
-                echo "<tr><td>".($row['orderid'])."</td><td>".($row['comments'])."</td><td>".($row['shipdate_expected'])."</td></tr>";
-            }
-            echo "</table>";
-            echo "</br>";
+           $candyResults=$mysqli->query("SELECT * FROM sweetwater_test WHERE comments like '%candy%'");
+           $candyTable = new CommentTable("Candy Comments", $candyResults);
+           $candyTable->printTable();
+ 
+           $callResults=$mysqli->query($CALL_QUERY);
+           $callTable = new CommentTable("Call Comments", $callResults);
+           $callTable->printTable();
 
-           echo "<table border='1'>";
-           echo "<caption>Call Me/Don't Call Me Comments</caption>";
-           while ($row = $row = $call_results->fetch_assoc()) {
-                $date = strtotime(explode('Expected Ship Date: ', $row['comments'])[1]); 
-                if(!empty($date) && $row['shipdate_expected'] == '0000-00-00 00:00:00'){
-                }
-                echo "<tr><td>".($row['orderid'])."</td><td>".($row['comments'])."</td><td>".($row['shipdate_expected'])."</td></tr>";
-            }
-            echo "</table>";
-            echo "</br>";
+           $referredResults=$mysqli->query($REFFERED_QUERY);
+           $referralTable = new CommentTable("Referral Comments", $referredResults);
+           $referralTable->printTable();
 
-           echo "<table border='1'>";
-           echo "<caption>Referral Comments</caption>";           
-           while ($row = $row = $referred_results->fetch_assoc()) {
-                $date = strtotime(explode('Expected Ship Date: ', $row['comments'])[1]); 
-                if(!empty($date) && $row['shipdate_expected'] == '0000-00-00 00:00:00'){
-                }
-                echo "<tr><td>".($row['orderid'])."</td><td>".($row['comments'])."</td><td>".($row['shipdate_expected'])."</td></tr>";
-            }
-            echo "</table>";
-            echo "</br>";
-
-          echo "<table border='1'>";
-           echo "<caption>Signature Comments</caption>";
-            while ($row = $row = $signature_results->fetch_assoc()) {
-                $date = strtotime(explode('Expected Ship Date: ', $row['comments'])[1]); 
-                if(!empty($date) && $row['shipdate_expected'] == '0000-00-00 00:00:00'){
-                    updateDate($mysqli, $row['orderid'], $date);
-                }
-                echo "<tr><td>".($row['orderid'])."</td><td>".($row['comments'])."</td><td>".($row['shipdate_expected'])."</td></tr>";
-            }
-                        echo "</br>";
-
-            echo "</table>";
-            
-              echo "<table border='1'>";
-           echo "<caption>Miscellaneous Comments</caption>";
-            while ($row = $row = $misc_results->fetch_assoc()) {
-                $date = strtotime(explode('Expected Ship Date: ', $row['comments'])[1]); 
-                if(!empty($date) && $row['shipdate_expected'] == '0000-00-00 00:00:00'){
-                } 
-                echo "<tr><td>".($row['orderid'])."</td><td>".($row['comments'])."</td><td>".($row['shipdate_expected'])."</td></tr>";
-            }
-                        echo "</br>";
-
-            echo "</table>";
+           $signatureResults=$mysqli->query($SIGNATURE_QUERY);
+           $signatureTable = new CommentTable("Signature Comments", $signatureResults);
+           $signatureTable->printTable();
+         
+           $miscResults=$mysqli->query($MISC_QUERY);
+           $miscTable = new CommentTable("Signature Comments", $miscResults);
+           $miscTable->printTable();
+         
+//                           $date = strtotime(explode('Expected Ship Date: ', $row['comments'])[1]); 
+//                if(!empty($date) && $row['shipdate_expected'] == '0000-00-00 00:00:00'){
+//                } 
             
         ?>
     </body>
