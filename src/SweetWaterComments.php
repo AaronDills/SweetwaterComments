@@ -4,7 +4,7 @@ require_once './CommentTable.php';
 require_once './Database.php';
 require_once './PreparedStatements.php';
 /**
- * Description of SweetWaterComments
+ * Main class for the project, contains functions to display the comments stored in the database table
  *
  * @author aaronsdills
  */
