@@ -1,4 +1,4 @@
-<?php include 'db_connection.php';?>
+<?php include 'Database.php';?>
 <?php include 'CommentTable.php';?>
 <?php include 'prepared_queries.php';?>
 <html>
@@ -8,26 +8,21 @@
     </head>
     <body>
         <?php
-           $mysqli=openConn();
+           $db = new Database("private/connection.xml");
            
-           $candyResults=$mysqli->query("SELECT * FROM sweetwater_test WHERE comments like '%candy%'");
-           $candyTable = new CommentTable("Candy Comments", $candyResults);
+           $candyTable = new CommentTable("Candy Comments", $db->performQuery($CANDY_QUERY));
            $candyTable->printTable();
  
-           $callResults=$mysqli->query($CALL_QUERY);
-           $callTable = new CommentTable("Call Comments", $callResults);
+           $callTable = new CommentTable("Call Comments", $db->performQuery($CALL_QUERY));
            $callTable->printTable();
 
-           $referredResults=$mysqli->query($REFFERED_QUERY);
-           $referralTable = new CommentTable("Referral Comments", $referredResults);
+           $referralTable = new CommentTable("Referral Comments", $db->performQuery($REFFERED_QUERY));
            $referralTable->printTable();
 
-           $signatureResults=$mysqli->query($SIGNATURE_QUERY);
-           $signatureTable = new CommentTable("Signature Comments", $signatureResults);
+           $signatureTable = new CommentTable("Signature Comments", $db->performQuery($SIGNATURE_QUERY));
            $signatureTable->printTable();
          
-           $miscResults=$mysqli->query($MISC_QUERY);
-           $miscTable = new CommentTable("Signature Comments", $miscResults);
+           $miscTable = new CommentTable("Misc Comments", $db->performQuery($MISC_QUERY));
            $miscTable->printTable();
          
 //                           $date = strtotime(explode('Expected Ship Date: ', $row['comments'])[1]); 
