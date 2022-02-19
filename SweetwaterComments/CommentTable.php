@@ -23,7 +23,9 @@ class CommentTable {
     
     private function printHeader(){
         echo "<table border='1'>";
-        echo "<caption>".$this->tableName."</caption>";
+        echo "<h1>".$this->tableName."</h1>";
+        echo "<tr><th>Order ID</th><th>Comments</th><th>Expected Ship Date</th></tr>";
+
     }
     
     private function printRecords(){
@@ -37,3 +39,4 @@ class CommentTable {
         echo "</br>";
     }
 }
+
