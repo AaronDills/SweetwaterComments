@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This class encapsulates the table name and records. It has one functions to print the table
+ * This class encapsulates the table name and records. Contains methods for printing records into an html table
  *
  * @author aaronsdills
  */
@@ -30,7 +30,8 @@ class CommentTable {
     
     private function printRecords(){
         while ($row = $row = $this->records->fetch_assoc()) {
-            echo "<tr><td>".($row['orderid'])."</td><td>".($row['comments'])."</td><td>".($row['shipdate_expected'])."</td></tr>";
+            $date = ($row['shipdate_expected'] != '0000-00-00 00:00:00')? date( 'm-d-Y',strtotime( $row['shipdate_expected'] )) :  "";
+            echo "<tr><td>".($row['orderid'])."</td><td>".($row['comments'])."</td><td>".($date)."</td></tr>";
         }
     }
     
@@ -39,4 +40,3 @@ class CommentTable {
         echo "</br>";
     }
 }
-
