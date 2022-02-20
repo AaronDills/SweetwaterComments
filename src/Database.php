@@ -16,6 +16,7 @@ class Database {
         if (file_exists($connectionInfoPath)) {
             $xmldata = simplexml_load_file($connectionInfoPath) or die("failed to read connection xml");
             $this->connection=$this->openConnection($xmldata->servername, $xmldata->username,$xmldata->password,$xmldata->database);
+            $this->connection->set_charset("utf8mb4");
         } else {
             exit('Failed to open xml file');
         }
