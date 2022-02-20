@@ -57,16 +57,16 @@ class Database {
      * @param int $orderid
      */
     private function updateRecord(String $shipdate, int $orderid){
-        $sql = "UPDATE sweetwater_test SET shipdate_expected='".$shipdate."' WHERE orderid=".$orderid.";";
-        $this->connection->query($sql) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($this->connection), E_USER_ERROR);
+        $query = "UPDATE sweetwater_test SET shipdate_expected='".$shipdate."' WHERE orderid=".$orderid.";";
+        $this->connection->query($query) or trigger_error("Query Failed! SQL: $query - Error: ".mysqli_error($this->connection), E_USER_ERROR);
     }
     
     /**
      * Queries table from connection objects
-     * @param String $queryStr
+     * @param String $query
      * @return the results from the query
      */
-    public function performQuery(String $queryStr){
-        return $this->connection->query($queryStr);
+    public function performQuery(String $query){
+        return $this->connection->query($query);
     }
 }
