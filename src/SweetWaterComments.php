@@ -2,7 +2,7 @@
 
 require_once './CommentTable.php';
 require_once './Database.php';
-require_once './PreparedStatements.php';
+require_once './QueryStatements.php';
 /**
  * Main class for the project, contains functions to display the comments stored in the database table
  *
@@ -15,11 +15,11 @@ class SweetWaterComments {
         $this->db = new Database("private/connection.xml"); 
     }
     public function displayComments(){
-        $this->displayCase("Candy Comments", PreparedStatements::CANDY_QUERY);
-        $this->displayCase("Call Comments", PreparedStatements::CALL_QUERY);
-        $this->displayCase("Referral Comments", PreparedStatements::REFFERED_QUERY);
-        $this->displayCase("Signature Comments", PreparedStatements::SIGNATURE_QUERY);
-        $this->displayCase("Misc. Comments", PreparedStatements::MISC_QUERY);
+        $this->displayCase("Candy Comments", QueryStatements::CANDY_QUERY);
+        $this->displayCase("Call Comments", QueryStatements::CALL_QUERY);
+        $this->displayCase("Referral Comments", QueryStatements::REFFERED_QUERY);
+        $this->displayCase("Signature Comments", QueryStatements::SIGNATURE_QUERY);
+        $this->displayCase("Misc. Comments", QueryStatements::MISC_QUERY);
     }
     
     private function displayCase(String $tableHeader, String $query){
