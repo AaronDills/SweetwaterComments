@@ -5,8 +5,8 @@
  *
  * @author aaronsdills
  */
-class PreparedStatements {
-    const CANDY_QUERY="SELECT * FROM sweetwater_test WHERE comments like '%candy%'";
+class QueryStatements {
+    const CANDY_QUERY="SELECT * FROM sweetwater_test WHERE comments like '%candy%' or comments like '%smarties%' or comments like '%taffy%'";
     const CALL_QUERY="SELECT * FROM sweetwater_test WHERE (comments like '% call %' OR comments like '% call.%' OR comments like '% calls%') AND comments not like '% call your%'";
     const REFFERED_QUERY="SELECT * FROM sweetwater_test WHERE comments like '%referred%'or comments like '%referral%'";
     const SIGNATURE_QUERY="SELECT * FROM sweetwater_test WHERE comments like '%signature%'";
