@@ -32,7 +32,7 @@ class Database {
      */
     public function needsToUpdateDates(String $query){
         $needsUpdateQuery = $query." AND comments like '%Expected Ship Date:%'";
-        $results = $this->connection->query($needsUpdateQuery) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($this->connection), E_USER_ERROR);;
+        $results = $this->connection->query($needsUpdateQuery);
         return mysqli_num_rows($results) > 0;
     }
     
@@ -67,6 +67,6 @@ class Database {
      * @return the results from the query
      */
     public function performQuery(String $queryStr){
-        return $this->connection->query($queryStr) or trigger_error("Query Failed! SQL: $sql - Error: ".mysqli_error($this->connection), E_USER_ERROR);
+        return $this->connection->query($queryStr);
     }
 }
