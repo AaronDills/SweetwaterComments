@@ -17,7 +17,7 @@ class Database {
             $xmldata = simplexml_load_file($connectionInfoPath) or die("failed to read connection xml");
             $this->connection=$this->openConnection($xmldata->servername, $xmldata->username,$xmldata->password,$xmldata->database);
         } else {
-            exit('Failed to open test.xml.');
+            exit('Failed to open xml file');
         }
     }
     
