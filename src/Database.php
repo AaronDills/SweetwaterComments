@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Contains a Database connection and operartions related to it
+ * Contains a database connection and operations related to it
  *
  * @author aaronsdills
  */
@@ -15,15 +15,11 @@ class Database {
     public function __construct(String $connectionInfoPath) {
         if (file_exists($connectionInfoPath)) {
             $xmldata = simplexml_load_file($connectionInfoPath) or die("failed to read connection xml");
-            $this->connection=$this->openConnection($xmldata->servername, $xmldata->username,$xmldata->password,$xmldata->database);
+            $this->connection=mysqli_connect($xmldata->servername, $xmldata->username,$xmldata->password,$xmldata->database);
             $this->connection->set_charset("utf8mb4");
         } else {
             exit('Failed to open xml file');
         }
-    }
-    
-    private function openConnection(String $servername, String $username, String $password, String $database){
-        return mysqli_connect($servername, $username, $password, $database);
     }
     
     /**
@@ -53,7 +49,7 @@ class Database {
     }
     
     /**
-     * Update a single record by orderId with a new date
+     * Updates a single record identified by an orderId with a new date
      * @param String $shipdate
      * @param int $orderid
      */
@@ -63,7 +59,7 @@ class Database {
     }
     
     /**
-     * Queries table from connection objects
+     * Queries table using the connection object
      * @param String $query
      * @return the results from the query
      */
